@@ -5,7 +5,7 @@ import os
 
 #Authenticate api
 from ibm_watson import LanguageTranslatorV3
-from ibm_cloud_sdk_core.authenticators import IAMAutenticator
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
 API_KEY = os.environ.get("API_KEY")
 API_URL = os.environ.get("API_URL")
@@ -27,6 +27,8 @@ def englishToFrench():
         text = initial_text,
         model_id = 'en-fr'
     ).get_result()
-#fix this
-    print(result)
-    return result
+    print(result["translations"][0]["translation"])
+    return result["translations"][0]["translation"]
+
+if __name__ == "__main__":
+    englishToFrench()
